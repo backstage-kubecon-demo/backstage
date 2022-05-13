@@ -57,7 +57,26 @@ techdocs:
 
 auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
-  providers: {}
+  environment: development
+  providers:
+    github:
+      development:
+        clientId: ${AUTH_GITHUB_CLIENT_ID}
+        clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+    google:
+      development:
+        clientId: ${AUTH_GOOGLE_CLIENT_ID}
+        clientSecret: ${AUTH_GOOGLE_CLIENT_SECRET}
+
+kubernetes:
+  serviceLocatorMethod:
+    type: 'multiTenant'
+  clusterLocatorMethods:
+    - type: gke
+      projectId: ${GCP_PROJECT_ID}
+      region: us-central1
+      clusterName: autopilot-cluster-1
+      skipTLSVerify: true
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
@@ -88,17 +107,14 @@ catalog:
     # Backstage example organization groups
     - type: url
       target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme/org.yaml
+      rules:
+        - allow: [User, Group]
 
     # Backstage example templates
     - type: url
-      target: https://github.com/backstage/software-templates/blob/main/scaffolder-templates/react-ssr-template/template.yaml
+      target: https://github.com/backstage-kubecon-demo/templates/blob/main/basic/template.yaml
       rules:
         - allow: [Template]
+
     - type: url
-      target: https://github.com/backstage/software-templates/blob/main/scaffolder-templates/springboot-grpc-template/template.yaml
-      rules:
-        - allow: [Template]
-    - type: url
-      target: https://github.com/backstage/software-templates/blob/main/scaffolder-templates/docs-template/template.yaml
-      rules:
-        - allow: [Template]
+      target: https://github.com/backstage-kubecon-demo/repo1234/blob/main/catalog-info.yaml
