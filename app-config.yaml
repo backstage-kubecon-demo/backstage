@@ -117,4 +117,4 @@ catalog:
         - allow: [Template]
 
     - type: url
-      target: https://github.com/backstage-kubecon-demo/repo1234/blob/main/catalog-info.yaml
+      target: https://github.com/backstage-kubecon-demo/grafana/blob/main/catalog-info.yaml
