@@ -1,9 +1,9 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: basic-template
-  title: Basic Simple Template
-  description: Create a simple API
+  name: grafana-template
+  title: Basic Simple Template with Grafana
+  description: Create a simple API, now with 100% more Grafana
   tags:
     - recommended
     - react
@@ -74,6 +74,13 @@ spec:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: /catalog-info.yaml
 
+    - id: graphs
+      name: Create Graphs in Grafana
+      action: grafana:dashboard:create
+      input:
+        folderName: ${{ parameters.name | capitalize }}
+        k8sDeploymentName: ${{ parameters.name }}
+
   output:
     links:
       - title: Repository
@@ -81,3 +88,6 @@ spec:
       - title: Open in catalog
         icon: catalog
         entityRef: ${{ steps.register.output.entityRef }}
+      - title: Grafana Dashboard
+        icon: dashboard
+        url: ${{ steps.graphs.output.dashboardUrl }}

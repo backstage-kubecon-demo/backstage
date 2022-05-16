@@ -119,6 +119,10 @@ catalog:
       target: ../templates/basic/template.yaml
       rules:
         - allow: [Template]
+    - type: file
+      target: ../templates/basic/template-grafana.yaml
+      rules:
+        - allow: [Template]
 
     - type: url
       target: https://github.com/backstage-kubecon-demo/grafana/blob/main/catalog-info.yaml
