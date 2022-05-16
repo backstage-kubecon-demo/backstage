@@ -15,6 +15,7 @@ spec:
       required:
         - name
         - owner
+        - grafanaFolderName
       properties:
         name:
           title: Name
@@ -33,6 +34,10 @@ spec:
           ui:options:
             allowedKinds:
               - Group
+        grafanaFolderName:
+          title: Grafana folder name
+          type: string
+          description: The name of the new folder to create in Grafana
     - title: Choose a location
       required:
         - repoUrl
@@ -78,7 +83,7 @@ spec:
       name: Create Graphs in Grafana
       action: grafana:dashboard:create
       input:
-        folderName: ${{ parameters.name | capitalize }}
+        folderName: ${{ parameters.grafanaFolderName }}
         k8sDeploymentName: ${{ parameters.name }}
 
   output:
