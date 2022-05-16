@@ -5,6 +5,10 @@ app:
 organization:
   name: My Company
 
+grafana:
+  host: ${GRAFANA_HOST}
+  token: ${GRAFANA_TOKEN}
+
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
   # See https://backstage.io/docs/tutorials/backend-to-backend-auth for
@@ -111,8 +115,8 @@ catalog:
         - allow: [User, Group]
 
     # Backstage example templates
-    - type: url
-      target: https://github.com/backstage-kubecon-demo/templates/blob/main/basic/template.yaml
+    - type: file
+      target: ../templates/basic/template.yaml
       rules:
         - allow: [Template]
 
